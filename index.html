@@ -8,6 +8,13 @@
 
     <link rel="stylesheet" href="./css/style.css">
     <title>Developer Type Test</title>
+
+     <!-- 카카오 공유하기 -->
+     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+     <script>
+     Kakao.init('d1e085ceabc9722dbe10cbcb322ed955');
+     Kakao.isInitialized();
+     </script>
 </head>
 <body>
     <section id="main" class="my-5 py-5 mx-auto">
@@ -73,10 +80,48 @@
 
             </div>
         </div>
+        <div>
+            <a href="javascript:setShare()"><img src="./img/icon-kakao.png" title="KakaoTalk" class="sharebtn_custom"/></a>
+
+        </div>
     </section>
 
 
     <script src="./js/mbti.js"> </script>
     <script src="./js/data.js"> </script>
+
+    <script type="text/javascript">
+        function setShare(){
+            var resultImg = document.querySelector('#resultImg'); 
+            var resultAlt = resultImg.firstElementChild.alt; 
+            const shareTitle = '나의 개발자 유형은 무엇일까? 나의 개발자 유형을 확인해보고 공유해보자!!';
+            const shareDes=infoList[resultAlt].name;
+            
+            const shareImage= 'https://mbtitestjake.netlify.app/' + 'img/title_img.png';
+            const shareURL = 'https://mbtitestjake.netlify.app/';
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                title: shareDes,
+                description: shareTitle,
+                imageUrl: shareImage,
+                link: {
+                    mobileWebUrl: shareURL,
+                    webUrl : shareURL,
+                },
+                },
+                buttons: [
+                {
+                    title: '결과 확인하기',
+                    link: {
+                    mobileWebUrl: shareURL,
+                    webUrl : shareURL
+                    },
+                },
+                ]
+            });
+        
+        }
+      </script>
 </body>
 </html>
